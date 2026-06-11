@@ -1,51 +1,51 @@
 {
-	"nav": {
-		"home": "Inicio",
-		"services": "Servicios",
-		"about": "Nosotros",
-		"contact": "Contacto"
-	},
-	"home": {
-		"tagline": "Software a medida e inteligencia artificial para empresas en Latinoamérica",
-		"description": "Construimos soluciones de software a medida y flujos de trabajo con IA para empresas listas para transformar su forma de operar.",
-		"cta": "Ver nuestros servicios",
-		"whoTitle": "Quiénes somos",
-		"whoDesc": "Catopia de Chen Antúnez es una empresa de software y soluciones de IA con base en Paraguay, atendiendo clientes en toda Latinoamérica. Combinamos rigor técnico con conocimiento regional para entregar software que realmente se adapta."
-	},
-	"services": {
-		"title": "Servicios",
-		"subtitle": "Lo que construimos para ti",
-		"software": {
-			"title": "Diseño de Software a Medida",
-			"description": "Diseñamos y desarrollamos software adaptado a tus procesos de negocio — desde herramientas internas hasta aplicaciones para clientes. Cada solución está construida para crecer contigo."
-		},
-		"ai": {
-			"title": "Integración de Agentes de IA",
-			"description": "Incorporamos agentes de inteligencia artificial en tus flujos de trabajo existentes, automatizando tareas repetitivas y habilitando decisiones más inteligentes y rápidas en todo tu equipo."
-		}
-	},
-	"about": {
-		"title": "Nosotros",
-		"subtitle": "Las personas detrás de Catopia",
-		"members": {
-			"chunwei": {
-				"name": "Chun Wei Chen",
-				"role": "Co-fundador · Ingeniero de Software"
-			},
-			"yuejie": {
-				"name": "Yue Jie Zhang",
-				"role": "Co-fundadora · Especialista en IA"
-			}
-		}
-	},
-	"contact": {
-		"title": "Contáctanos",
-		"subtitle": "Cuéntanos sobre tu proyecto y te responderemos a la brevedad.",
-		"name": "Nombre",
-		"email": "Correo electrónico",
-		"subject": "Asunto",
-		"message": "Mensaje",
-		"send": "Enviar mensaje",
-		"hint": "Esto abrirá tu cliente de correo ya completado."
-	}
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "home": {
+    "tagline": "Software a medida e inteligencia artificial para empresas en Latinoamérica",
+    "description": "Construimos soluciones de software a medida y flujos de trabajo con IA para empresas listas para transformar su forma de operar.",
+    "cta": "Ver nuestros servicios",
+    "whoTitle": "Quiénes somos",
+    "whoDesc": "Catopia de Chen Antúnez es una empresa de software y soluciones de IA con base en Paraguay, atendiendo clientes en toda Latinoamérica. Combinamos rigor técnico con conocimiento regional para entregar software que realmente se adapta."
+  },
+  "services": {
+    "title": "Servicios",
+    "subtitle": "Lo que construimos para ti",
+    "software": {
+      "title": "Diseño de Software a Medida",
+      "description": "Diseñamos y desarrollamos software adaptado a tus procesos de negocio — desde herramientas internas hasta aplicaciones para clientes. Cada solución está construida para crecer contigo."
+    },
+    "ai": {
+      "title": "Integración de Agentes de IA",
+      "description": "Incorporamos agentes de inteligencia artificial en tus flujos de trabajo existentes, automatizando tareas repetitivas y habilitando decisiones más inteligentes y rápidas en todo tu equipo."
+    }
+  },
+  "about": {
+    "title": "Nosotros",
+    "subtitle": "Las personas detrás de Catopia",
+    "members": {
+      "chunwei": {
+        "name": "Chun Wei Chen",
+        "role": "Co-fundador · Ingeniero de Software"
+      },
+      "yuejie": {
+        "name": "Yue Jie Zhang",
+        "role": "Co-fundadora · Especialista en IA"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Cuéntanos sobre tu proyecto y te responderemos a la brevedad.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "hint": "Esto abrirá tu cliente de correo ya completado."
+  }
 }

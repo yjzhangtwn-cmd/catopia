@@ -24,10 +24,12 @@ bun run cf-typegen  # Regenerate cloudflare-env.d.ts after adding Wrangler bindi
 ## Architecture
 
 ### Two Runtimes
+
 - `bun dev` runs on Node.js — use for fast iteration.
 - `bun preview` runs on the Cloudflare Workers runtime — required to test Cloudflare-specific features (bindings, caching, image optimization).
 
 ### Cloudflare Integration
+
 - **`open-next.config.ts`** — configures the OpenNext/Cloudflare adapter. R2 incremental cache is available here (currently commented out).
 - **`wrangler.jsonc`** — Cloudflare Worker config. Worker name: `calm-bread-8df3`. Bindings defined here: `ASSETS` (static files), `IMAGES` (image optimization), `WORKER_SELF_REFERENCE` (self-reference for caching).
 - **`cloudflare-env.d.ts`** — auto-generated TypeScript types for Cloudflare bindings; regenerate with `bun run cf-typegen` after changing `wrangler.jsonc`.
@@ -35,12 +37,15 @@ bun run cf-typegen  # Regenerate cloudflare-env.d.ts after adding Wrangler bindi
 - Cloudflare bindings are accessible at runtime via `getCloudflareContext()` from `@opennextjs/cloudflare`. This also works in `bun dev` because `next.config.ts` calls `initOpenNextCloudflareForDev()`.
 
 ### Icons
+
 Use **Lucide React** (`lucide-react`) for all icons. Import named components directly: `import { IconName } from "lucide-react"`. Do not add SVG files or other icon libraries.
 
 ### Next.js App Router
+
 All pages live under `src/app/[locale]/` using the App Router. Tailwind CSS v4 is configured via PostCSS (`postcss.config.mjs`).
 
 ### i18n
+
 Supported locales: `en` (en-US) and `es` (es-PY), configured in `src/i18n/routing.ts`.
 
 - **`src/proxy.ts`** — next-intl middleware (Next.js 16 calls this "proxy"). Reads the `Accept-Language` request header and redirects `/` → `/en` or `/es` automatically.
@@ -51,6 +56,7 @@ Supported locales: `en` (en-US) and `es` (es-PY), configured in `src/i18n/routin
 - Per-locale SEO metadata (title, description, keywords, OG locale, hreflang) lives in `src/app/[locale]/layout.tsx` via `generateMetadata`.
 
 ### Rendering Strategy
+
 This project uses OpenNext on Cloudflare Workers — do **not** add `output: 'export'` to `next.config.ts` (it would break the Workers setup). Instead, every page file must explicitly opt into static rendering:
 
 ```ts

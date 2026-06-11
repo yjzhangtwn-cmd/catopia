@@ -6,65 +6,70 @@ import { Code2, Bot } from "lucide-react";
 export const dynamic = "force-static";
 
 export default async function Home() {
-	const t = await getTranslations();
+  const t = await getTranslations();
 
-	return (
-		<div className="max-w-5xl mx-auto px-6">
-			{/* Hero */}
-			<section className="flex flex-col items-center text-center gap-6 py-24">
-				<Image
-					src="/images/catopia-256.webp"
-					alt="Catopia"
-					width={96}
-					height={96}
-					priority
-					className="rounded-2xl"
-				/>
-				<div className="flex flex-col gap-3">
-					<h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-						Catopia de Chen Antúnez
-					</h1>
-					<p className="text-lg sm:text-xl text-foreground/60 max-w-xl">
-						{t("home.tagline")}
-					</p>
-				</div>
-				<p className="text-foreground/50 max-w-lg text-sm leading-relaxed">
-					{t("home.description")}
-				</p>
-				<Link
-					href="/services"
-					className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity"
-				>
-					{t("home.cta")}
-				</Link>
-			</section>
+  return (
+    <div className="max-w-5xl mx-auto px-6">
+      {/* Hero */}
+      <section className="flex flex-col items-center text-center gap-6 py-24">
+        <Image
+          src="/images/catopia-256.webp"
+          alt="Catopia"
+          width={96}
+          height={96}
+          priority
+          className="rounded-2xl"
+        />
+        <div className="flex flex-col gap-3">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
+            Catopia de Chen Antúnez
+          </h1>
+          <p className="text-lg sm:text-xl text-foreground/60 max-w-xl">
+            {t("home.tagline")}
+          </p>
+        </div>
+        <p className="text-foreground/50 max-w-lg text-sm leading-relaxed">
+          {t("home.description")}
+        </p>
+        <Link
+          href="/services"
+          className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity"
+        >
+          {t("home.cta")}
+        </Link>
+      </section>
 
-			{/* Services preview */}
-			<section className="border-t border-foreground/10 py-16 grid grid-cols-1 sm:grid-cols-2 gap-6">
-				<div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
-					<Code2 size={24} className="text-foreground/40" />
-					<h2 className="font-semibold">{t("services.software.title")}</h2>
-					<p className="text-sm text-foreground/50 leading-relaxed">
-						{t("services.software.description")}
-					</p>
-				</div>
-				<div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
-					<Bot size={24} className="text-foreground/40" />
-					<h2 className="font-semibold">{t("services.ai.title")}</h2>
-					<p className="text-sm text-foreground/50 leading-relaxed">
-						{t("services.ai.description")}
-					</p>
-				</div>
-			</section>
+      {/* Services preview */}
+      <section className="border-t border-foreground/10 py-16 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
+          <Code2 size={24} className="text-foreground/40" />
+          <h2 className="font-semibold">{t("services.software.title")}</h2>
+          <p className="text-sm text-foreground/50 leading-relaxed">
+            {t("services.software.description")}
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
+          <Bot size={24} className="text-foreground/40" />
+          <h2 className="font-semibold">{t("services.ai.title")}</h2>
+          <p className="text-sm text-foreground/50 leading-relaxed">
+            {t("services.ai.description")}
+          </p>
+        </div>
+      </section>
 
-			{/* About blurb */}
-			<section className="border-t border-foreground/10 py-16 flex flex-col gap-4 max-w-2xl">
-				<h2 className="text-xl font-semibold">{t("home.whoTitle")}</h2>
-				<p className="text-foreground/55 text-sm leading-relaxed">{t("home.whoDesc")}</p>
-				<Link href="/about" className="text-sm font-medium hover:underline underline-offset-4 w-fit">
-					{t("nav.about")} →
-				</Link>
-			</section>
-		</div>
-	);
+      {/* About blurb */}
+      <section className="border-t border-foreground/10 py-16 flex flex-col gap-4 max-w-2xl">
+        <h2 className="text-xl font-semibold">{t("home.whoTitle")}</h2>
+        <p className="text-foreground/55 text-sm leading-relaxed">
+          {t("home.whoDesc")}
+        </p>
+        <Link
+          href="/about"
+          className="text-sm font-medium hover:underline underline-offset-4 w-fit"
+        >
+          {t("nav.about")} →
+        </Link>
+      </section>
+    </div>
+  );
 }

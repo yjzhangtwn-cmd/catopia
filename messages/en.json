@@ -1,51 +1,51 @@
 {
-	"nav": {
-		"home": "Home",
-		"services": "Services",
-		"about": "About",
-		"contact": "Contact"
-	},
-	"home": {
-		"tagline": "Custom software and AI workflows for Latin American businesses",
-		"description": "We build tailored software solutions and AI-powered workflows for businesses ready to transform how they operate.",
-		"cta": "See our services",
-		"whoTitle": "Who we are",
-		"whoDesc": "Catopia de Chen Antúnez is a software and AI solutions firm based in Paraguay, serving clients across Latin America. We combine engineering rigour with deep regional understanding to deliver software that fits."
-	},
-	"services": {
-		"title": "Services",
-		"subtitle": "What we build for you",
-		"software": {
-			"title": "Custom Software Design",
-			"description": "We design and build software tailored to your business processes — from internal tools to customer-facing applications. Every solution is architected to scale with your growth."
-		},
-		"ai": {
-			"title": "AI Agent Workflow Integration",
-			"description": "We embed intelligent AI agents into your existing workflows, automating repetitive tasks and enabling smarter, faster decision-making across your entire team."
-		}
-	},
-	"about": {
-		"title": "About Us",
-		"subtitle": "The people behind Catopia",
-		"members": {
-			"chunwei": {
-				"name": "Chun Wei Chen",
-				"role": "Co-founder · Software Engineer"
-			},
-			"yuejie": {
-				"name": "Yue Jie Zhang",
-				"role": "Co-founder · AI Specialist"
-			}
-		}
-	},
-	"contact": {
-		"title": "Contact Us",
-		"subtitle": "Tell us about your project and we'll get back to you.",
-		"name": "Name",
-		"email": "Email",
-		"subject": "Subject",
-		"message": "Message",
-		"send": "Send message",
-		"hint": "This will open your email client pre-filled."
-	}
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "tagline": "Custom software and AI workflows for Latin American businesses",
+    "description": "We build tailored software solutions and AI-powered workflows for businesses ready to transform how they operate.",
+    "cta": "See our services",
+    "whoTitle": "Who we are",
+    "whoDesc": "Catopia de Chen Antúnez is a software and AI solutions firm based in Paraguay, serving clients across Latin America. We combine engineering rigour with deep regional understanding to deliver software that fits."
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "What we build for you",
+    "software": {
+      "title": "Custom Software Design",
+      "description": "We design and build software tailored to your business processes — from internal tools to customer-facing applications. Every solution is architected to scale with your growth."
+    },
+    "ai": {
+      "title": "AI Agent Workflow Integration",
+      "description": "We embed intelligent AI agents into your existing workflows, automating repetitive tasks and enabling smarter, faster decision-making across your entire team."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The people behind Catopia",
+    "members": {
+      "chunwei": {
+        "name": "Chun Wei Chen",
+        "role": "Co-founder · Software Engineer"
+      },
+      "yuejie": {
+        "name": "Yue Jie Zhang",
+        "role": "Co-founder · AI Specialist"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Tell us about your project and we'll get back to you.",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "hint": "This will open your email client pre-filled."
+  }
 }
