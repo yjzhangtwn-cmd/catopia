@@ -47,10 +47,10 @@ export function FontSizeControl() {
           aria-pressed={current === key}
           aria-label={`Font size ${key}`}
           style={{ fontSize: `${display}px` }}
-          className={`px-1.5 py-1 leading-none cursor-pointer transition-colors ${
+          className={`px-1.5 py-1 leading-none cursor-pointer transition-colors min-w-6 min-h-6 flex items-center justify-center ${
             current === key
               ? "bg-foreground/10 text-foreground"
-              : "text-foreground/40 hover:bg-foreground/5 hover:text-foreground/70"
+              : "text-foreground/55 hover:bg-foreground/5 hover:text-foreground/75"
           }`}
         >
           A

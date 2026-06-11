@@ -71,7 +71,7 @@ export default async function Services({
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
       <div className="flex flex-col gap-2 mb-8 md:mb-12">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-foreground/50">{t("subtitle")}</p>
+        <p className="text-foreground/60">{t("subtitle")}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -83,14 +83,14 @@ export default async function Services({
             </div>
             <h2 className="text-lg font-semibold">{t("software.title")}</h2>
           </div>
-          <p className="text-sm text-foreground/55 leading-relaxed">
+          <p className="text-sm text-foreground/65 leading-relaxed">
             {t("software.description")}
           </p>
           <ul className="flex flex-col gap-2">
             {softwarePoints[lang].map((point) => (
               <li
                 key={point}
-                className="flex items-start gap-2 text-sm text-foreground/50"
+                className="flex items-start gap-2 text-sm text-foreground/60"
               >
                 <CheckCircle size={15} className="mt-0.5 shrink-0" />
                 {point}
@@ -107,14 +107,14 @@ export default async function Services({
             </div>
             <h2 className="text-lg font-semibold">{t("ai.title")}</h2>
           </div>
-          <p className="text-sm text-foreground/55 leading-relaxed">
+          <p className="text-sm text-foreground/65 leading-relaxed">
             {t("ai.description")}
           </p>
           <ul className="flex flex-col gap-2">
             {aiPoints[lang].map((point) => (
               <li
                 key={point}
-                className="flex items-start gap-2 text-sm text-foreground/50"
+                className="flex items-start gap-2 text-sm text-foreground/60"
               >
                 <CheckCircle size={15} className="mt-0.5 shrink-0" />
                 {point}

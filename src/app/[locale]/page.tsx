@@ -34,7 +34,7 @@ export default async function Home({
             {t("home.tagline")}
           </p>
         </div>
-        <p className="text-foreground/50 max-w-lg text-sm leading-relaxed">
+        <p className="text-foreground/60 max-w-lg text-sm leading-relaxed">
           {t("home.description")}
         </p>
         <Link
@@ -50,14 +50,14 @@ export default async function Home({
         <div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
           <Code2 size={24} className="text-foreground/40" />
           <h2 className="font-semibold">{t("services.software.title")}</h2>
-          <p className="text-sm text-foreground/50 leading-relaxed">
+          <p className="text-sm text-foreground/60 leading-relaxed">
             {t("services.software.description")}
           </p>
         </div>
         <div className="flex flex-col gap-3 p-6 rounded-xl border border-foreground/10 hover:border-foreground/20 transition-colors">
           <Bot size={24} className="text-foreground/40" />
           <h2 className="font-semibold">{t("services.ai.title")}</h2>
-          <p className="text-sm text-foreground/50 leading-relaxed">
+          <p className="text-sm text-foreground/60 leading-relaxed">
             {t("services.ai.description")}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default async function Home({
       {/* About blurb */}
       <section className="border-t border-foreground/10 py-16 flex flex-col gap-4 max-w-2xl">
         <h2 className="text-xl font-semibold">{t("home.whoTitle")}</h2>
-        <p className="text-foreground/55 text-sm leading-relaxed">
+        <p className="text-foreground/65 text-sm leading-relaxed">
           {t("home.whoDesc")}
         </p>
         <Link

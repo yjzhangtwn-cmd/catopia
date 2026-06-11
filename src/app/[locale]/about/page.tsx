@@ -32,7 +32,7 @@ export default async function About({
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
       <div className="flex flex-col gap-2 mb-8 md:mb-12">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-foreground/50">{t("subtitle")}</p>
+        <p className="text-foreground/60">{t("subtitle")}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
@@ -48,7 +48,7 @@ export default async function About({
             </div>
             <div className="flex flex-col gap-1">
               <p className="font-semibold">{t(`members.${key}.name`)}</p>
-              <p className="text-sm text-foreground/50">
+              <p className="text-sm text-foreground/60">
                 {t(`members.${key}.role`)}
               </p>
             </div>

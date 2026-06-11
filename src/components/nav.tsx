@@ -33,7 +33,7 @@ export function Nav() {
           onClick={close}
           className="flex items-center gap-2 font-semibold shrink-0"
         >
-          <Image src="/favicon.png" alt="Catopia" width={24} height={24} />
+          <Image src="/favicon.png" alt="" width={24} height={24} />
           Catopia
         </Link>
 
@@ -52,7 +52,7 @@ export function Nav() {
                 className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
                   active
                     ? "font-medium"
-                    : "text-foreground/50 hover:text-foreground hover:bg-foreground/5"
+                    : "text-foreground/60 hover:text-foreground hover:bg-foreground/5"
                 }`}
               >
                 {t(key)}
@@ -93,7 +93,7 @@ export function Nav() {
                 className={`px-3 py-3 rounded-md text-sm transition-colors ${
                   active
                     ? "font-medium"
-                    : "text-foreground/50 hover:text-foreground hover:bg-foreground/5"
+                    : "text-foreground/60 hover:text-foreground hover:bg-foreground/5"
                 }`}
               >
                 {t(key)}

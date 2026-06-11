@@ -91,7 +91,7 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-foreground/40">{t("hint")}</p>
+        <p className="text-xs text-foreground/55">{t("hint")}</p>
         <button
           type="submit"
           className="rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity cursor-pointer self-stretch sm:self-auto text-center"
