@@ -29,6 +29,12 @@
       "service": "catopia",
     },
   ],
+  "routes": [
+    {
+      "pattern": "catopia.chenantunez.com",
+      "custom_domain": true,
+    },
+  ],
   "observability": {
     "enabled": true,
   },
