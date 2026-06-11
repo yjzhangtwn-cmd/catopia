@@ -35,24 +35,30 @@ bun run deploy       # build with OpenNext and deploy to Cloudflare
 
 ```
 src/
-  app/[locale]/      # App Router pages (home, services, about, contact)
-  components/        # Nav, Footer, ThemeToggle, LocaleSwitch, ThemeScript
+  app/
+    page.tsx         # Root redirect: / → /en
+    [locale]/        # App Router pages (home, services, about, contact)
+  components/        # Nav, Footer, ThemeToggle, LocaleSwitch, FontSizeControl, ThemeScript, FontSizeScript
   i18n/              # next-intl routing, request config, navigation helpers
-  proxy.ts           # next-intl middleware (locale detection + routing)
 messages/
-  en.json            # English translations
-  es.json            # Spanish translations
+  en.json            # English (en-US) translations
+  es.json            # Spanish (es-PY) translations
+  pt.json            # Brazilian Portuguese (pt-BR) translations
 wrangler.jsonc       # Cloudflare Worker config
 open-next.config.ts  # OpenNext/Cloudflare adapter config
 ```
 
 ## i18n
 
-- URL-based locale prefix: `/en/...` and `/es/...`
-- `src/proxy.ts` — next-intl middleware handles locale detection and redirects (`/` → `/en` or `/es`)
-- All static pages call `setRequestLocale(locale)` at the top for compatibility with `force-static`
+- Supported locales: `en` (en-US), `es` (es-PY), `pt` (pt-BR)
+- URL-based locale prefix: `/en/...`, `/es/...`, `/pt/...`
+- No middleware — Next.js 16's `proxy.ts` is forced to Node.js runtime, which OpenNext Cloudflare does not support. Locale detection is handled entirely via `setRequestLocale(locale)` in each page.
+- Root `/` redirects to `/en` via `src/app/page.tsx`
 - Client components use `useTranslations()`, server components use `getTranslations()`
+- Always use `usePathname` and `useRouter` from `@/i18n/navigation` (not `next/navigation`) in client components
 
-## Theme
+## Theme and UI preferences
 
-Dark/light mode via a `ThemeScript` in `<head>` (reads `localStorage`, falls back to `prefers-color-scheme`). The toggle uses `useSyncExternalStore` to stay in sync with the DOM without hydration mismatches.
+- Dark/light toggle via `ThemeScript` in `<head>` (reads `localStorage`, falls back to `prefers-color-scheme`) and `ThemeToggle` component using `useSyncExternalStore`
+- Font size control (S / M / L → 16px / 18px / 20px root) via `FontSizeScript` + `FontSizeControl`; scales all `rem`-based Tailwind utilities automatically
+- Both preferences persist in `localStorage` and are restored before hydration (no flash) and on every route navigation via `ThemeRestorer`

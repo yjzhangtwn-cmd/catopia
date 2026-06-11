@@ -59,6 +59,17 @@ Supported locales: `en` (en-US), `es` (es-PY), and `pt` (pt-BR), configured in `
 - Per-locale SEO metadata (title, description, keywords, OG locale, hreflang) lives in `src/app/[locale]/layout.tsx` via `generateMetadata`.
 - Use `usePathname` and `useRouter` from `@/i18n/navigation` (not `next/navigation`) for locale-aware routing in Client Components.
 
+### UI Preferences (Theme & Font Size)
+
+Both preferences are persisted in `localStorage` and restored before hydration via `beforeInteractive` scripts to avoid any flash of wrong state.
+
+- **`src/components/theme-script.tsx`** — `<Script strategy="beforeInteractive">` reads `localStorage('theme')`, falls back to `prefers-color-scheme`, and toggles the `dark` class on `<html>`. Also seeds `localStorage` on first visit.
+- **`src/components/font-size-script.tsx`** — same pattern; reads `localStorage('font-size')` (`sm`/`md`/`lg`) and sets `document.documentElement.style.fontSize` to `16px`/`18px`/`20px`. All Tailwind `rem` units scale automatically.
+- **`src/components/theme-restorer.tsx`** — Client component using `useLayoutEffect` + `usePathname`. Re-applies both theme class and font size from `localStorage` before each paint on route change (React reconciliation clears externally-set attributes during soft navigation).
+- **`src/components/theme-toggle.tsx`** — `useSyncExternalStore` watching a `MutationObserver` on `document.documentElement` class; writes to `localStorage` on click.
+- **`src/components/font-size-control.tsx`** — same pattern, watching `style` attribute; three `A` buttons (fixed `px` display sizes so the control stays visually consistent regardless of current root size).
+- **`src/components/locale-switch.tsx`** — `appearance-none` `<select>` with `bg-background`/`text-foreground` and a `ChevronDown` icon overlay; uses `useRouter`/`usePathname` from `@/i18n/navigation` for locale-aware switching.
+
 ### Rendering Strategy
 
 This project uses OpenNext on Cloudflare Workers — do **not** add `output: 'export'` to `next.config.ts` (it would break the Workers setup). Instead, every page file must explicitly opt into static rendering:
