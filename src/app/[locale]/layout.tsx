@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeScript } from "@/components/theme-script";
 import { FontSizeScript } from "@/components/font-size-script";
@@ -15,8 +16,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const dynamicParams = false;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -118,6 +117,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  if (!(routing.locales as readonly string[]).includes(locale)) notFound();
   setRequestLocale(locale);
   const messages = await getMessages();
 

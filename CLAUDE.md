@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **catopia** — a Next.js 16 app built to run on Cloudflare Workers via the OpenNext adapter.
 
+## Maintenance Rules
+
+**Keep docs up to date.** After every meaningful change — new file, new pattern, removed file, discovered constraint — update both `CLAUDE.md` and `README.md` before finishing. Future agents read these files first; stale docs cause repeated mistakes.
+
+**Prefer auto-discovery over manual declarations.** This project uses Next.js file-path routing: the filesystem is the route registry. Do not maintain separate hardcoded lists of routes, locales, or paths that duplicate what the framework already tracks.
+
+- Locales → import `routing.locales` from `src/i18n/routing.ts`
+- App routes (e.g. for the sitemap) → auto-discovered at build time via `discoverRoutes()` in `next.config.ts`, injected into `process.env.APP_ROUTES`; read that env var rather than writing a route list by hand
+- If a new page is added, no manual update is needed — `discoverRoutes()` picks it up automatically on the next build
+
 ## Package Manager
 
 This project uses **Bun**. Always use `bun` instead of `npm`/`yarn`/`pnpm`.
@@ -98,3 +108,44 @@ export default async function Page({
 ```
 
 Omitting `setRequestLocale` silently falls back to the default locale (`en`) on every page.
+
+### Not-Found (404) Page
+
+Invalid routes are handled at two levels:
+
+1. **Invalid locale** (e.g. `/sitemap`, `/foo`) — caught by an explicit guard at the top of `src/app/[locale]/layout.tsx`:
+   ```ts
+   if (!(routing.locales as readonly string[]).includes(locale)) notFound();
+   ```
+2. **Valid locale, unknown sub-path** (e.g. `/en/idk`) — Next.js returns 404 automatically because no matching page file exists.
+
+Both cases render **`src/app/not-found.tsx`** — a root-level 404 page that includes its own `<html>/<body>` (the root layout just passes children through, so it does not provide them). It embeds an inline theme script and imports `globals.css` directly so CSS custom properties work.
+
+**Do not use `export const dynamicParams = false`** in `[locale]/layout.tsx`. It interferes with OpenNext's request routing and causes valid locale paths (e.g. `/en`) to return 404 in `bun preview` and the deployed Worker. Use the explicit `notFound()` guard instead.
+
+### SEO
+
+- **`public/robots.txt`** — static file served before Next.js routing. Allows all crawlers, disallows `/_next/` (build artifacts), and references the sitemap. Using a static file is critical: without it, `/robots.txt` is matched by the `[locale]` dynamic segment with locale `"robots.txt"`, rendering the app instead of a valid robots file.
+- **`src/app/sitemap.ts`** — generates `/sitemap.xml` at build time (`force-static`). Routes are auto-discovered via `process.env.APP_ROUTES` (see below). Locales come from `routing.locales`.
+
+### Build-Time Filesystem Access (`next.config.ts`)
+
+`process.cwd()` is **not** reliable inside `sitemap.ts` or other pre-rendered pages during `next build` — the compilation context does not guarantee the working directory is the project root. `fs.readdirSync` calls there fail silently.
+
+**The pattern:** do filesystem work in `next.config.ts` instead. The config file always runs before compilation with `process.cwd()` at the project root. Bake results into `nextConfig.env` — Next.js statically replaces `process.env.X` at compile time, so the value is available everywhere including the Workers bundle:
+
+```ts
+// next.config.ts
+const nextConfig: NextConfig = {
+  env: {
+    APP_ROUTES: JSON.stringify(discoverRoutes()), // scans src/app/[locale] with fs
+  },
+};
+```
+
+```ts
+// src/app/sitemap.ts
+const routes = JSON.parse(process.env.APP_ROUTES ?? '[""]') as string[];
+```
+
+Apply this pattern for any build-time data that requires filesystem access.
