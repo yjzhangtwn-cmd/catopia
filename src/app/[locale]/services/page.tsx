@@ -28,6 +28,12 @@ const softwarePoints = {
     "Integraciones de APIs y sistemas",
     "Modernización de sistemas legados",
   ],
+  pt: [
+    "Aplicativos web e mobile",
+    "Ferramentas internas de gestão",
+    "Integrações de APIs e sistemas",
+    "Modernização de sistemas legados",
+  ],
 };
 
 const aiPoints = {
@@ -43,6 +49,12 @@ const aiPoints = {
     "Pipelines de reportes automatizados",
     "Orquestación de flujos de trabajo con IA",
   ],
+  pt: [
+    "Agentes de processamento de documentos e dados",
+    "Chatbots para atendimento ao cliente",
+    "Pipelines de relatórios automatizados",
+    "Orquestração de fluxos de trabalho com IA",
+  ],
 };
 
 export default async function Services({
@@ -53,18 +65,18 @@ export default async function Services({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("services");
-  const lang = locale === "es" ? "es" : "en";
+  const lang = locale === "es" ? "es" : locale === "pt" ? "pt" : "en";
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
-      <div className="flex flex-col gap-2 mb-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+      <div className="flex flex-col gap-2 mb-8 md:mb-12">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
         <p className="text-foreground/50">{t("subtitle")}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Custom Software */}
-        <div className="flex flex-col gap-5 p-8 rounded-xl border border-foreground/10">
+        <div className="flex flex-col gap-5 p-5 sm:p-8 rounded-xl border border-foreground/10">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-foreground/5">
               <Code2 size={22} />
@@ -88,7 +100,7 @@ export default async function Services({
         </div>
 
         {/* AI Workflows */}
-        <div className="flex flex-col gap-5 p-8 rounded-xl border border-foreground/10">
+        <div className="flex flex-col gap-5 p-5 sm:p-8 rounded-xl border border-foreground/10">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-foreground/5">
               <Bot size={22} />

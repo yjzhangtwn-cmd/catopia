@@ -15,9 +15,9 @@ export default async function Home({
   const t = await getTranslations();
 
   return (
-    <div className="max-w-5xl mx-auto px-6">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
       {/* Hero */}
-      <section className="flex flex-col items-center text-center gap-6 py-24">
+      <section className="flex flex-col items-center text-center gap-6 py-14 md:py-24">
         <Image
           src="/images/catopia-256.webp"
           alt="Catopia"

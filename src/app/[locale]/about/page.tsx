@@ -29,8 +29,8 @@ export default async function About({
   const t = await getTranslations("about");
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
-      <div className="flex flex-col gap-2 mb-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+      <div className="flex flex-col gap-2 mb-8 md:mb-12">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
         <p className="text-foreground/50">{t("subtitle")}</p>
       </div>

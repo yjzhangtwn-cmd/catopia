@@ -90,11 +90,11 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-foreground/40">{t("hint")}</p>
         <button
           type="submit"
-          className="rounded-lg bg-foreground px-5 py-2 text-sm font-medium text-background hover:opacity-80 transition-opacity cursor-pointer"
+          className="rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity cursor-pointer self-stretch sm:self-auto text-center"
         >
           {t("send")}
         </button>
