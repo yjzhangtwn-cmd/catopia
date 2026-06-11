@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeScript } from "@/components/theme-script";
+import { ThemeRestorer } from "@/components/theme-restorer";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import "../globals.css";
@@ -20,7 +21,7 @@ export function generateStaticParams() {
 
 const localeMeta = {
   en: {
-    title: "Catopia | Software Development & Digital Solutions with AI",
+    title: "Catopia | Custom Software & AI Solutions for Latin America",
     description:
       "Catopia empowers businesses in Paraguay and Latin America with custom software development, digital transformation, and AI-powered workflows.",
     keywords: [
@@ -35,7 +36,7 @@ const localeMeta = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Catopia | Desarrollo de Software & Soluciones Digitales con IA",
+    title: "Catopia | Software a Medida y Soluciones de IA para Latinoamérica",
     description:
       "Catopia impulsa empresas en Paraguay y Latinoamérica con desarrollo de software a medida, transformación digital y flujos de trabajo potenciados por inteligencia artificial.",
     keywords: [
@@ -48,6 +49,22 @@ const localeMeta = {
       "desarrollo web Paraguay",
     ],
     ogLocale: "es_PY",
+  },
+  pt: {
+    title:
+      "Catopia | Software Sob Medida e Soluções de IA para a América Latina",
+    description:
+      "A Catopia impulsiona empresas no Paraguai e na América Latina com desenvolvimento de software sob medida, transformação digital e fluxos de trabalho potencializados por inteligência artificial.",
+    keywords: [
+      "desenvolvimento de software Paraguai",
+      "soluções digitais América Latina",
+      "inteligência artificial empresas",
+      "automação de processos",
+      "transformação digital",
+      "software sob medida",
+      "desenvolvimento web",
+    ],
+    ogLocale: "pt_BR",
   },
 } as const;
 
@@ -83,6 +100,7 @@ export async function generateMetadata({
       languages: {
         en: "https://catopia.chenantunez.com/en",
         es: "https://catopia.chenantunez.com/es",
+        pt: "https://catopia.chenantunez.com/pt",
       },
     },
     robots: { index: true, follow: true },
@@ -97,6 +115,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
@@ -110,7 +129,8 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <ThemeRestorer />
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Nav />
           <main className="flex-1">{children}</main>
           <Footer />

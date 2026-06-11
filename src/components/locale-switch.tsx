@@ -1,28 +1,37 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
-import { useRouter } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
+
+const locales = [
+  { code: "en", flag: "🇺🇸", label: "EN" },
+  { code: "es", flag: "🇵🇾", label: "ES" },
+  { code: "pt", flag: "🇧🇷", label: "PT" },
+] as const;
+
+type Locale = (typeof locales)[number]["code"];
 
 export function LocaleSwitch() {
   const locale = useLocale();
   const router = useRouter();
-  const fullPath = usePathname(); // e.g. /es or /es/about
+  const pathname = usePathname();
 
-  function toggle() {
-    const nextLocale = locale === "en" ? "es" : "en";
-    // Strip the current locale prefix to get the bare path
-    const stripped = fullPath.replace(new RegExp(`^/${locale}`), "") || "/";
-    router.replace(stripped, { locale: nextLocale });
+  function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    router.replace(pathname, { locale: e.target.value as Locale });
   }
 
   return (
-    <button
-      onClick={toggle}
+    <select
+      value={locale}
+      onChange={onChange}
       aria-label="Switch language"
-      className="text-xs font-mono px-2 py-1 rounded-md border border-foreground/20 hover:bg-foreground/8 transition-colors cursor-pointer"
+      className="text-xs font-mono px-2 py-1 rounded-md border border-foreground/20 hover:bg-foreground/8 transition-colors cursor-pointer bg-transparent"
     >
-      {locale === "en" ? "ES" : "EN"}
-    </button>
+      {locales.map(({ code, flag, label }) => (
+        <option key={code} value={code}>
+          {flag} {label}
+        </option>
+      ))}
+    </select>
   );
 }

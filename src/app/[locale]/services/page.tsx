@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Code2, Bot, CheckCircle } from "lucide-react";
 
 export const dynamic = "force-static";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("services");
   return { title: t("title") };
 }
@@ -45,6 +51,7 @@ export default async function Services({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("services");
   const lang = locale === "es" ? "es" : "en";
 

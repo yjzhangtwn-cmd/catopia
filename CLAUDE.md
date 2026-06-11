@@ -13,12 +13,13 @@ This project uses **Bun**. Always use `bun` instead of `npm`/`yarn`/`pnpm`.
 ## Commands
 
 ```bash
-bun dev          # Next.js dev server at localhost:3000 (Node.js runtime, not Cloudflare)
-bun preview      # Build and preview using the actual Cloudflare Workers runtime locally
-bun build        # Next.js production build only
-bun run deploy   # Build with OpenNext and deploy to Cloudflare
-bun lint         # ESLint
-bun run cf-typegen  # Regenerate cloudflare-env.d.ts after adding Wrangler bindings
+bun dev              # Next.js dev server at localhost:3000 (Node.js runtime, not Cloudflare)
+bun preview          # Build and preview using the actual Cloudflare Workers runtime locally
+bun build            # Next.js production build only
+bun run deploy       # Build with OpenNext and deploy to Cloudflare
+bun run lint         # prettier --check . && eslint . (both must pass)
+bun run format       # prettier --write . (auto-fix formatting)
+bun run cf-typegen   # Regenerate cloudflare-env.d.ts after adding Wrangler bindings
 ```
 
 ## Architecture
@@ -31,7 +32,7 @@ bun run cf-typegen  # Regenerate cloudflare-env.d.ts after adding Wrangler bindi
 ### Cloudflare Integration
 
 - **`open-next.config.ts`** — configures the OpenNext/Cloudflare adapter. R2 incremental cache is available here (currently commented out).
-- **`wrangler.jsonc`** — Cloudflare Worker config. Worker name: `calm-bread-8df3`. Bindings defined here: `ASSETS` (static files), `IMAGES` (image optimization), `WORKER_SELF_REFERENCE` (self-reference for caching).
+- **`wrangler.jsonc`** — Cloudflare Worker config. Worker name: `catopia`. Bindings defined here: `ASSETS` (static files), `IMAGES` (image optimization), `WORKER_SELF_REFERENCE` (self-reference for caching).
 - **`cloudflare-env.d.ts`** — auto-generated TypeScript types for Cloudflare bindings; regenerate with `bun run cf-typegen` after changing `wrangler.jsonc`.
 - **`.dev.vars`** — local-only environment variables passed to the Wrangler dev runtime (equivalent of `.env` for Cloudflare).
 - Cloudflare bindings are accessible at runtime via `getCloudflareContext()` from `@opennextjs/cloudflare`. This also works in `bun dev` because `next.config.ts` calls `initOpenNextCloudflareForDev()`.
@@ -46,14 +47,17 @@ All pages live under `src/app/[locale]/` using the App Router. Tailwind CSS v4 i
 
 ### i18n
 
-Supported locales: `en` (en-US) and `es` (es-PY), configured in `src/i18n/routing.ts`.
+Supported locales: `en` (en-US), `es` (es-PY), and `pt` (pt-BR), configured in `src/i18n/routing.ts`.
 
-- **`src/proxy.ts`** — next-intl middleware (Next.js 16 calls this "proxy"). Reads the `Accept-Language` request header and redirects `/` → `/en` or `/es` automatically.
+**No middleware.** Next.js 16's `proxy.ts` (the new middleware file) is forced to run on the Node.js runtime, which OpenNext Cloudflare does not support. Since all pages use `force-static` + `setRequestLocale`, locale detection works without middleware. The root `/` redirects to `/en` via `src/app/page.tsx`. Do **not** add `proxy.ts` or `middleware.ts` — it will break `bun preview`/`bun run deploy`.
+
+- **`src/app/page.tsx`** — root redirect: `redirect('/en')`.
 - **`src/i18n/routing.ts`** — locale list and default locale.
 - **`src/i18n/request.ts`** — server-side next-intl config; loads the correct `messages/*.json` file.
-- **`messages/en.json`** / **`messages/es.json`** — translation files. Add new keys here when adding UI text.
+- **`messages/en.json`** / **`messages/es.json`** / **`messages/pt.json`** — translation files. Add new keys to all three when adding UI text.
 - In Server Components use `getTranslations("namespace")` from `next-intl/server`. In Client Components use `useTranslations("namespace")`.
 - Per-locale SEO metadata (title, description, keywords, OG locale, hreflang) lives in `src/app/[locale]/layout.tsx` via `generateMetadata`.
+- Use `usePathname` and `useRouter` from `@/i18n/navigation` (not `next/navigation`) for locale-aware routing in Client Components.
 
 ### Rendering Strategy
 
@@ -64,3 +68,22 @@ export const dynamic = "force-static";
 ```
 
 Add this to every `page.tsx` (and `route.ts` where applicable). The locale is in the URL path so pages can still be fully static even with i18n.
+
+**Critical:** `force-static` pages cannot call `headers()` at render time. Because next-intl normally reads the locale from a request header, you must call `setRequestLocale(locale)` at the top of every `page.tsx`, `layout.tsx`, and `generateMetadata` function before any `getTranslations()` or `getMessages()` call:
+
+```ts
+import { getTranslations, setRequestLocale } from "next-intl/server";
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale); // must come before getTranslations
+  const t = await getTranslations("namespace");
+  // ...
+}
+```
+
+Omitting `setRequestLocale` silently falls back to the default locale (`en`) on every page.

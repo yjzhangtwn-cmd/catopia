@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "calm-bread-8df3",
+      "name": "catopia",
       "dependencies": {
         "@opennextjs/cloudflare": "^1.19.11",
         "lucide-react": "^1.17.0",

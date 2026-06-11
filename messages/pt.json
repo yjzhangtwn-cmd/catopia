@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "home": {
+    "tagline": "Software sob medida e fluxos de IA para empresas da América Latina",
+    "description": "Construímos soluções de software personalizadas e fluxos de trabalho com IA para empresas prontas para transformar sua forma de operar.",
+    "cta": "Ver nossos serviços",
+    "whoTitle": "Quem somos",
+    "whoDesc": "A Catopia de Chen Antúnez é uma empresa de software e soluções de IA sediada no Paraguai, atendendo clientes em toda a América Latina. Combinamos rigor técnico com profundo conhecimento regional para entregar software que realmente se encaixa."
+  },
+  "services": {
+    "title": "Serviços",
+    "subtitle": "O que construímos para você",
+    "software": {
+      "title": "Desenvolvimento de Software Sob Medida",
+      "description": "Projetamos e desenvolvemos software adaptado aos seus processos de negócio — de ferramentas internas a aplicações para clientes. Cada solução é arquitetada para crescer com você."
+    },
+    "ai": {
+      "title": "Integração de Agentes de IA",
+      "description": "Integramos agentes de inteligência artificial nos seus fluxos de trabalho existentes, automatizando tarefas repetitivas e habilitando decisões mais inteligentes e ágeis em toda a sua equipe."
+    }
+  },
+  "about": {
+    "title": "Sobre Nós",
+    "subtitle": "As pessoas por trás da Catopia",
+    "members": {
+      "chunwei": {
+        "name": "Chun Wei Chen",
+        "role": "Co-fundador · Engenheiro de Software"
+      },
+      "yuejie": {
+        "name": "Yue Jie Zhang",
+        "role": "Co-fundadora · Especialista em IA"
+      }
+    }
+  },
+  "contact": {
+    "title": "Fale Conosco",
+    "subtitle": "Conte-nos sobre o seu projeto e entraremos em contato.",
+    "name": "Nome",
+    "email": "E-mail",
+    "subject": "Assunto",
+    "message": "Mensagem",
+    "send": "Enviar mensagem",
+    "hint": "Isso abrirá o seu cliente de e-mail já preenchido."
+  }
+}
