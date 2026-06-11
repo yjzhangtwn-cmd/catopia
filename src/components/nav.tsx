@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { LocaleSwitch } from "./locale-switch";
+import { FontSizeControl } from "./font-size-control";
 
 const links = [
   { href: "/", key: "home" },
@@ -52,6 +53,7 @@ export function Nav() {
         </div>
 
         <div className="flex items-center gap-1 shrink-0">
+          <FontSizeControl />
           <LocaleSwitch />
           <ThemeToggle />
         </div>

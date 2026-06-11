@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeScript } from "@/components/theme-script";
+import { FontSizeScript } from "@/components/font-size-script";
 import { ThemeRestorer } from "@/components/theme-restorer";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -122,6 +123,7 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <head>
         <ThemeScript />
+        <FontSizeScript />
         <meta name="color-scheme" content="light dark" />
         <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

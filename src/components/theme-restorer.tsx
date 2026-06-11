@@ -8,12 +8,21 @@ export function ThemeRestorer() {
 
   useLayoutEffect(() => {
     try {
-      const stored = localStorage.getItem("theme");
+      const storedTheme = localStorage.getItem("theme");
       const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)",
       ).matches;
-      const isDark = stored === "dark" || (stored === null && prefersDark);
+      const isDark =
+        storedTheme === "dark" || (storedTheme === null && prefersDark);
       document.documentElement.classList.toggle("dark", isDark);
+    } catch {}
+
+    try {
+      const storedSize = localStorage.getItem("font-size");
+      document.documentElement.style.setProperty(
+        "font-size",
+        storedSize === "sm" ? "16px" : storedSize === "lg" ? "20px" : "18px",
+      );
     } catch {}
   }, [pathname]);
 
